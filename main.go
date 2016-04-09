@@ -1,18 +1,27 @@
 package main
 
 import (
-	chn "goplay/lib/channels"
+	//chn "github.com/August2008/goplay/lib/channels"
 	"runtime"
-	"time"
+	//"time"
 	//"fmt"
-	"goplay/lib/arrays"
+	//"github.com/August2008/goplay/lib/arrays"
+	//"github.com/August2008/goplay/lib/xml"
 	//"goplay/lib/sysio"
+	algo "github.com/August2008/goplay/lib/algorithms"
 )
 
 func main() {
 	runtime.GOMAXPROCS(4)
-	arrays.PrintArray()
 
+	//arrays.PrintArray()
+	//algo.TestMergeSort()
+	//algo.TestNFactrorial()
+	//algo.TestQuickSort()
+	algo.TestCountingSort()
+
+	//arrays.PrintArray()
+	//xml.TestWrite()
 	//arrays.PrintMap()
 	//consts.Print()
 	//branching.PrintIfElse()
@@ -41,12 +50,12 @@ func main() {
 
 	//chn.TestPrimes()
 
-	chn.TestETL3()
+	//chn.TestETL3()
 
 	//<-done
-	time.Sleep(time.Second * 10)
+	//time.Sleep(time.Second * 10)
 	//fmt.Scanln()
-	println("Done!")
+	//println("Done!")
 }
 
 //Alphabet function
