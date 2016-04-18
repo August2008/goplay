@@ -192,8 +192,10 @@ func TestQuickSort() {
 
 func CountingSort(a []int) {
 	var m = getMaxRange(a)
-	var equal = countEqual(a, m+1)
-	fmt.Println(equal)
+	var equal = countEqual(a, m) //index equal numbers
+	var less = countLess(equal, m)
+	var b = rearrange(a, less, m)
+	fmt.Println(b)
 }
 
 func getMaxRange(a []int) int {
@@ -203,25 +205,38 @@ func getMaxRange(a []int) int {
 			m = v
 		}
 	}
-	return m
+	return m + 1
 }
 
 func countEqual(a []int, m int) []int {
 	var equal = make([]int, m, m)
-	for i := 0; i < m; i++ {
-		equal[i] = 0
-	}
 	for _, v := range a {
 		equal[v]++
 	}
 	return equal
 }
 
-func countLess(a []int) {
+func countLess(equal []int, m int) []int {
+	var less = make([]int, m, m)
+	for j := 1; j < m; j++ {
+		less[j] = less[j-1] + equal[j-1]
+	}
+	return less
+}
 
+func rearrange(a, next []int, m int) []int {
+	var n = len(a)
+	var b = make([]int, n, n)
+	for i := 0; i < n; i++ {
+		var key = a[i]
+		var index = next[key]
+		b[index] = key
+		next[key]++
+	}
+	return b
 }
 
 func TestCountingSort() {
-	var a = []int{4, 1, 5, 0, 1, 6, 5, 1, 5, 3}
+	var a = []int{4, 1, 5, 0, 1, 6, 5, 1, 5}
 	CountingSort(a)
 }

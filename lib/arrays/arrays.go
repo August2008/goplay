@@ -22,12 +22,16 @@ func Add(numbers ...int) int {
 // PrintArray is a exported functions
 func PrintArray() {
 
-	var a = make([]int, 10, 10)
-	var b = [5]int{1, 2, 3, 4, 5}
-	//var c = [5]int{6, 7, 8, 9, 10}
-	a = append(a[0:1], b[1:4]...)
+	//var a = make([]int, 0, 10)
+	var b = []int{1, 2, 3, 4, 5}
 
-	fmt.Println(a)
+	b = append(b, 0)
+	b = append(b[len(b)-1:], b[0:len(b)-1]...)
+	fmt.Println(b)
+	//var c = [5]int{6, 7, 8, 9, 10}
+	//a = append(a[0:1], b[1:4]...)
+
+	//fmt.Println(a)
 	//arr1 := [3]int{1, 2, 3}
 	//fmt.Println(arr1)
 

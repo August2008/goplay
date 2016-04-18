@@ -19,6 +19,7 @@ func main() {
 	//algo.TestNFactrorial()
 	//algo.TestQuickSort()
 	algo.TestCountingSort()
+	//algo.TopologicalSort()
 
 	//arrays.PrintArray()
 	//xml.TestWrite()
