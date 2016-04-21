@@ -18,8 +18,8 @@ func main() {
 	//algo.TestMergeSort()
 	//algo.TestNFactrorial()
 	//algo.TestQuickSort()
-	algo.TestCountingSort()
-	//algo.TopologicalSort()
+	//algo.TestCountingSort()
+	algo.TestShortestPath()
 
 	//arrays.PrintArray()
 	//xml.TestWrite()

@@ -192,9 +192,9 @@ func TestQuickSort() {
 
 func CountingSort(a []int) {
 	var m = getMaxRange(a)
-	var equal = countEqual(a, m) //index equal numbers
-	var less = countLess(equal, m)
-	var b = rearrange(a, less, m)
+	var equal = countEqual(a, m)   //index equal numbers by occurence
+	var less = countLess(equal, m) //less contains indexes of where a elements should go in b
+	var b = rearrange(a, less, m)  //sort a by copying from a using next indexes
 	fmt.Println(b)
 }
 
