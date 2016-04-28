@@ -17,13 +17,12 @@ func NewBHeap() *BHeap {
 func (this *BHeap) Add(node int) {
 	var i = len(this.tree)
 	this.tree = append(this.tree, node)
-	var j = parent(i)
+	var j = parent(i + 1)
 	for j != -1 && this.tree[i] < this.tree[j] {
 		this.tree[i], this.tree[j] = this.tree[j], this.tree[i]
 		i = j
 		j = parent(i)
 	}
-	this.heapify(i)
 }
 
 func (this *BHeap) Next() bool {
@@ -47,7 +46,7 @@ func (this *BHeap) heapify(i int) {
 		return
 	}
 	var m, j = i - 1, i - 1
-	var p = parent(i)
+	var p = parent(j)
 	if p < 0 {
 		return
 	}
@@ -59,7 +58,7 @@ func (this *BHeap) heapify(i int) {
 	if r < n && this.tree[j] < this.tree[r] {
 		m = r
 	}
-	if m != i {
+	if m != j {
 		this.tree[j], this.tree[m] = this.tree[m], this.tree[j]
 		this.heapify(m)
 	}

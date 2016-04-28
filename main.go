@@ -45,12 +45,16 @@ func main() {
 	bh.Extract()
 
 	bh.Add(5)
-	bh.Add(2)
+	//bh.Add(2)
 	bh.Add(6)
 	bh.Add(8)
 	bh.Add(7)
 
 	fmt.Println(bh.ToArray())
+
+	for bh.Next() {
+		fmt.Println(bh.Extract())
+	}
 
 	//owl := st.NewOwl()
 	//fmt.Println(owl.Taxonomy())
