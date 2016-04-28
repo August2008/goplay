@@ -4,11 +4,12 @@ import (
 	//chn "github.com/August2008/goplay/lib/channels"
 	"runtime"
 	//"time"
-	//"fmt"
+	"fmt"
 	//"github.com/August2008/goplay/lib/arrays"
 	//"github.com/August2008/goplay/lib/xml"
 	//"goplay/lib/sysio"
-	algo "github.com/August2008/goplay/lib/algorithms"
+	//algo "github.com/August2008/goplay/lib/algorithms"
+	"github.com/August2008/goplay/lib/trees"
 )
 
 func main() {
@@ -19,7 +20,7 @@ func main() {
 	//algo.TestNFactrorial()
 	//algo.TestQuickSort()
 	//algo.TestCountingSort()
-	algo.TestShortestPath()
+	//algo.TestShortestPath()
 
 	//arrays.PrintArray()
 	//xml.TestWrite()
@@ -27,6 +28,29 @@ func main() {
 	//consts.Print()
 	//branching.PrintIfElse()
 	//branching.PrintLoops()
+
+	var bh = trees.NewBHeap()
+
+	bh.Add(3)
+	bh.Add(2)
+	bh.Add(4)
+
+	fmt.Println(bh.ToArray())
+
+	bh.Extract()
+
+	bh.Add(1)
+	bh.Add(9)
+
+	bh.Extract()
+
+	bh.Add(5)
+	bh.Add(2)
+	bh.Add(6)
+	bh.Add(8)
+	bh.Add(7)
+
+	fmt.Println(bh.ToArray())
 
 	//owl := st.NewOwl()
 	//fmt.Println(owl.Taxonomy())

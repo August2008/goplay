@@ -4,17 +4,17 @@ import (
 //"fmt"
 )
 
-type BinaryHeap struct {
+type BHeap struct {
 	tree []int
 }
 
-func NewBinaryHeap() *BinaryHeap {
-	var heap = new(BinaryHeap)
+func NewBHeap() *BHeap {
+	var heap = new(BHeap)
 	heap.tree = make([]int, 0)
 	return heap
 }
 
-func (this *BinaryHeap) Add(node int) {
+func (this *BHeap) Add(node int) {
 	var i = len(this.tree)
 	this.tree = append(this.tree, node)
 	var j = parent(i)
@@ -23,13 +23,14 @@ func (this *BinaryHeap) Add(node int) {
 		i = j
 		j = parent(i)
 	}
+	this.heapify(i)
 }
 
-func (this *BinaryHeap) Next() bool {
+func (this *BHeap) Next() bool {
 	return len(this.tree) > 0
 }
 
-func (this *BinaryHeap) Extract() int {
+func (this *BHeap) Extract() int {
 	var n = len(this.tree)
 	if n == 0 {
 		return -1
@@ -40,31 +41,31 @@ func (this *BinaryHeap) Extract() int {
 	return next
 }
 
-func (this *BinaryHeap) heapify(i int) {
+func (this *BHeap) heapify(i int) {
 	var n = len(this.tree)
 	if n == 0 {
 		return
 	}
-	var m = i
-	var p = parent(i - 1)
+	var m, j = i - 1, i - 1
+	var p = parent(i)
 	if p < 0 {
 		return
 	}
 	var l = left(p)
-	if l <= n && this.tree[i-1] < this.tree[l] {
+	if l < n && this.tree[j] < this.tree[l] {
 		m = l
 	}
 	var r = right(p)
-	if r <= n && this.tree[i-1] < this.tree[r] {
+	if r < n && this.tree[j] < this.tree[r] {
 		m = r
 	}
 	if m != i {
-		this.tree[i-1], this.tree[m] = this.tree[m], this.tree[i-1]
+		this.tree[j], this.tree[m] = this.tree[m], this.tree[j]
 		this.heapify(m)
 	}
 }
 
-func (this *BinaryHeap) ToArray() []int {
+func (this *BHeap) ToArray() []int {
 	return this.tree
 }
 
