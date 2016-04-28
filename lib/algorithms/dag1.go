@@ -166,7 +166,7 @@ func TestShortestPath() {
 	var critical = make([]Task, 0)
 	for _, v := range pred {
 		if v > 0 {
-			pert = append(critical, tasks[v])
+			critical = append(critical, tasks[v])
 		}
 	}
 	fmt.Println(critical) //critical path in the PERT chart
