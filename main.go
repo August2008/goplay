@@ -12,6 +12,19 @@ import (
 	"github.com/August2008/goplay/lib/trees"
 )
 
+type Job struct {
+	Name   string
+	Weight int
+}
+
+type JobSorter struct {
+	Jobs []Job
+}
+
+func (j *JobSorter) Less(i, j int) bool {
+	return j.Jobs[i] < j.Jobs[j]
+}
+
 func main() {
 	runtime.GOMAXPROCS(4)
 
@@ -29,31 +42,22 @@ func main() {
 	//branching.PrintIfElse()
 	//branching.PrintLoops()
 
-	var bh = trees.NewBHeap()
+	var h = trees.NewBHeap(20)
+	h.Push(&Job{Name: "A", Weight: 3})
+	h.Push(&Job{Name: "A", Weight: 2})
+	h.Push(&Job{Name: "A", Weight: 4})
+	h.Push(&Job{Name: "A", Weight: 1})
+	h.Push(&Job{Name: "A", Weight: 9})
+	h.Push(&Job{Name: "A", Weight: 5})
+	h.Push(&Job{Name: "A", Weight: 6})
+	h.Push(&Job{Name: "A", Weight: 8})
+	h.Push(&Job{Name: "A", Weight: 7})
+	h.Push(&Job{Name: "A", Weight: 1})
+	h.Push(&Job{Name: "A", Weight: 1})
 
-	bh.Add(3)
-	bh.Add(2)
-	bh.Add(4)
-
-	fmt.Println(bh.ToArray())
-
-	bh.Extract()
-
-	bh.Add(1)
-	bh.Add(9)
-
-	bh.Extract()
-
-	bh.Add(5)
-	//bh.Add(2)
-	bh.Add(6)
-	bh.Add(8)
-	bh.Add(7)
-
-	fmt.Println(bh.ToArray())
-
-	for bh.Next() {
-		fmt.Println(bh.Extract())
+	for !h.Empty() {
+		fmt.Println(h.ToArray())
+		fmt.Println(h.Pop())
 	}
 
 	//owl := st.NewOwl()

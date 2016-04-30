@@ -1,79 +1,95 @@
 package trees
 
+//https://en.wikipedia.org/wiki/Binary_heap
+
 import (
 //"fmt"
 )
 
+type Interface interface {
+	Less(i, j int) bool
+}
+
 type BHeap struct {
-	tree []int
+	tree []Interface
 }
 
-func NewBHeap() *BHeap {
-	var heap = new(BHeap)
-	heap.tree = make([]int, 0)
-	return heap
+func NewBHeap(n int) *BHeap {
+	var h = new(BHeap)
+	h.tree = make([]Interface, 0, n)
+	return h
 }
 
-func (this *BHeap) Add(node int) {
-	var i = len(this.tree)
-	this.tree = append(this.tree, node)
-	var j = parent(i + 1)
-	for j != -1 && this.tree[i] < this.tree[j] {
-		this.tree[i], this.tree[j] = this.tree[j], this.tree[i]
+func (h *BHeap) Push(node Interface) {
+	var i = len(h.tree)
+	h.tree = append(h.tree, node) //always add at the end
+	var j = parent(i)
+	for j != -1 && node.Less(i, j) { //maintain transitive relation
+		//whenever A < B and B < C, then also A < C
+		h.swap(i, j) //replace parent with it
 		i = j
-		j = parent(i)
+		j = parent(i) //keep bubbling it up until it's less than parent
 	}
 }
 
-func (this *BHeap) Next() bool {
-	return len(this.tree) > 0
-}
-
-func (this *BHeap) Extract() int {
-	var n = len(this.tree)
+func (h *BHeap) Pop() interface{} {
+	var n = len(h.tree)
 	if n == 0 {
 		return -1
 	}
-	var next = this.tree[0]
-	this.tree = append(this.tree[:0], this.tree[1:]...)
-	this.heapify(n - 1)
+	var next = h.next() //get next and remove it + move last to first
+	h.heapify(0)
 	return next
 }
 
-func (this *BHeap) heapify(i int) {
-	var n = len(this.tree)
+func (h *BHeap) Empty() bool {
+	return len(h.tree) == 0
+}
+
+func (h *BHeap) heapify(i int) {
+	var n = len(h.tree) - 1
 	if n == 0 {
-		return
+		return //just one left
 	}
-	var m, j = i - 1, i - 1
-	var p = parent(j)
-	if p < 0 {
-		return
+	var j = i
+	var l = left(i)
+	if l <= n && h.tree[l].Less(l, i) {
+		j = l
 	}
-	var l = left(p)
-	if l < n && this.tree[j] < this.tree[l] {
-		m = l
+	var r = right(i)
+	if r <= n && h.tree[r].Less(r, j) {
+		j = r
 	}
-	var r = right(p)
-	if r < n && this.tree[j] < this.tree[r] {
-		m = r
-	}
-	if m != j {
-		this.tree[j], this.tree[m] = this.tree[m], this.tree[j]
-		this.heapify(m)
+	if j != i {
+		h.swap(i, j)
+		h.heapify(j)
 	}
 }
 
-func (this *BHeap) ToArray() []int {
-	return this.tree
+func (h *BHeap) swap(i, j int) {
+	h.tree[i], h.tree[j] = h.tree[j], h.tree[i]
+}
+
+func (h *BHeap) next() interface{} {
+	var next = h.tree[0]                       //first element is always min/max
+	h.tree = append(h.tree[:0], h.tree[1:]...) //remove it from the tree
+	var n = len(h.tree) - 1
+	if n > 2 {
+		h.tree = append(h.tree[n:], h.tree[:n]...) //move last to first
+	}
+	return next
+}
+
+func (h *BHeap) ToArray() []Interface {
+	return h.tree
 }
 
 func left(i int) int {
-	return 2 * i
+	return 2*i + 1
 }
 
 func right(i int) int {
-	return 2*i + 1
+	return 2*i + 2
 }
 
 func parent(i int) int {
