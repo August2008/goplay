@@ -12,19 +12,6 @@ import (
 	"github.com/August2008/goplay/lib/trees"
 )
 
-type Job struct {
-	Name   string
-	Weight int
-}
-
-type JobSorter struct {
-	Jobs []Job
-}
-
-func (j *JobSorter) Less(i, j int) bool {
-	return j.Jobs[i] < j.Jobs[j]
-}
-
 func main() {
 	runtime.GOMAXPROCS(4)
 
@@ -42,21 +29,21 @@ func main() {
 	//branching.PrintIfElse()
 	//branching.PrintLoops()
 
-	var h = trees.NewBHeap(20)
-	h.Push(&Job{Name: "A", Weight: 3})
-	h.Push(&Job{Name: "A", Weight: 2})
-	h.Push(&Job{Name: "A", Weight: 4})
-	h.Push(&Job{Name: "A", Weight: 1})
-	h.Push(&Job{Name: "A", Weight: 9})
-	h.Push(&Job{Name: "A", Weight: 5})
-	h.Push(&Job{Name: "A", Weight: 6})
-	h.Push(&Job{Name: "A", Weight: 8})
-	h.Push(&Job{Name: "A", Weight: 7})
-	h.Push(&Job{Name: "A", Weight: 1})
-	h.Push(&Job{Name: "A", Weight: 1})
+	var h = trees.NewMinHeap(20)
+	h.Push(&trees.Node{Value: "A", Ordinal: 3})
+	h.Push(&trees.Node{Value: "B", Ordinal: 2})
+	h.Push(&trees.Node{Value: "C", Ordinal: 4})
+	h.Push(&trees.Node{Value: "D", Ordinal: 7})
+	h.Push(&trees.Node{Value: "E", Ordinal: 9})
+	h.Push(&trees.Node{Value: "F", Ordinal: 5})
+	h.Push(&trees.Node{Value: "G", Ordinal: 6})
+	h.Push(&trees.Node{Value: "H", Ordinal: 8})
+	h.Push(&trees.Node{Value: "I", Ordinal: 7})
+	h.Push(&trees.Node{Value: "J", Ordinal: 1})
+	h.Push(&trees.Node{Value: "K", Ordinal: 0})
 
-	for !h.Empty() {
-		fmt.Println(h.ToArray())
+	for h.Len() > 0 {
+		//fmt.Println(h.ToArray())
 		fmt.Println(h.Pop())
 	}
 
