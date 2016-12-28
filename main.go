@@ -8,11 +8,12 @@ import (
 	//"github.com/dmumladze/goplay/lib/arrays"
 	//"github.com/dmumladze/goplay/lib/xml"
 	//"goplay/lib/sysio"
-	//algo "github.com/dmumladze/goplay/lib/algorithms"
-
+	//algo "github.com/dmumladze/goplay/lib/algorithms
 	//algo "github.com/dmumladze/goplay/lib/algorithms"
 	//"github.com/dmumladze/goplay/lib/trees"
 	"github.com/dmumladze/goplay/lib/lists"
+	//algo "github.com/dmumladze/goplay/lib/algorithms"
+	//"github.com/dmumladze/goplay/lib/trees"
 )
 
 func main() {

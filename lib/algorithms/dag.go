@@ -2,7 +2,11 @@ package algorithms
 
 import (
 	"fmt"
+<<<<<<< HEAD
 	"github.com/dmumladze/goplay/lib/trees"
+=======
+	"github.com/August2008/goplay/lib/trees"
+>>>>>>> 0f346476d7f759a5c15ad762b3fb00545a04eff1
 	"math"
 	//"time"
 )
