@@ -16,3 +16,14 @@ var planets = Planets{
 	{Name: "Uranus"},
 	{Name: "Neptune"},
 }
+
+type Vertex struct {
+	Name   string
+	Weight float64
+}
+
+type Edge struct {
+	From   string
+	To     []string
+	Weight float64
+}

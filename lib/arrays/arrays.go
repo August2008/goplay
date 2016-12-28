@@ -28,6 +28,7 @@ func PrintArray() {
 	b = append(b, 0)
 	b = append(b[len(b)-1:], b[0:len(b)-1]...)
 	fmt.Println(b)
+
 	//var c = [5]int{6, 7, 8, 9, 10}
 	//a = append(a[0:1], b[1:4]...)
 

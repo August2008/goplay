@@ -16,6 +16,7 @@ and we can write f(n)=Omega(g(n).
 
 import (
 	"fmt"
+	"github.com/dmumladze/goplay/lib/trees"
 	"sort"
 )
 
@@ -239,4 +240,21 @@ func rearrange(a, next []int, m int) []int {
 func TestCountingSort() {
 	var a = []int{4, 1, 5, 0, 1, 6, 5, 1, 5}
 	CountingSort(a)
+}
+
+func heapsort(a []int) []int {
+	var h = trees.NewMinHeap()
+	for _, v := range a {
+		h.Push(v, float64(v))
+	}
+	a = make([]int, 0)
+	for h.Len() > 0 {
+		a = append(a, h.Pop().(int))
+	}
+	return a
+}
+
+func TestHeapsort() {
+	var a = heapsort([]int{4, 8, 5, 0, 2, 6, 9, 1, 10})
+	fmt.Println(a)
 }
